@@ -1,6 +1,9 @@
 FROM ubuntu
 
-RUN apt-get update && apt-get install -y cowsay fortunes \
-    && rm -rf /var/lib/apt/lists/*
+COPY ./bin/start /usr/local/bin/start
 
-CMD /usr/games/fortune -a | /usr/games/cowsay
+RUN apt-get update && apt-get install -y cowsay fortunes \
+    && rm -rf /var/lib/apt/lists/* \
+    && chmod ugo+x /usr/local/bin/start
+
+CMD start
